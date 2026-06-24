@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gottlob Frege — for all, there exists</title>
+<meta name="description" content="LOGIKĒ IX — Gottlob Frege (1848–1925). The greatest advance in logic since Aristotle. In the Begriffsschrift (1879) he gave logic QUANTIFIERS — ∀ 'for all' and ∃ 'there exists' — and analysed statements as functions of arguments, so logic could finally express the sentences of mathematics: 'every number has a successor', and the relations and nested quantifiers term logic never could. This is first-order logic, the logic of modern mathematics and computer science. Live quantifiers, relations, and the order that matters (∀x∃y ≠ ∃y∀x). Then the Russell paradox that destroyed his logicism on the eve of publication. Honest: ignored in his lifetime; his late diaries record repugnant views. David Lee Wise, two-layer honest.">
+<style>
+  :root{--bg:#0c0f17;--panel:#121622;--panel2:#19202f;--edge:#2a3346;--ink:#ede6d6;--dim:#b3ad9a;--faint:#7c7660;
+    --ochre:#d9b66a;--ochre2:#f0d79a;--proof:#5ad1ff;--proof2:#a7e6ff;--one:#7fe0a0;--zero:#fb7185;--amber:#fbbf24;--ember:#fb923c;
+    --mono:'SFMono-Regular',ui-monospace,'Cascadia Code',Menlo,Consolas,monospace;--serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.58;background-image:radial-gradient(1100px 560px at 75% -10%,#1c2436 0%,transparent 55%),radial-gradient(900px 500px at 0% 100%,#14110a 0%,transparent 55%);}
+  .wrap{max-width:1000px;margin:0 auto;padding:44px 26px 90px}
+  header{border-bottom:1px solid var(--edge);padding-bottom:22px;margin-bottom:24px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ochre);opacity:.95}
+  h1{font-family:Georgia,serif;font-size:38px;line-height:1.08;margin:.3em 0 .14em;font-weight:600}h1 em{color:var(--ochre2);font-style:italic}
+  .who{font-family:var(--mono);font-size:12px;color:var(--faint);letter-spacing:.04em}
+  .sub{color:var(--dim);font-size:16px;max-width:74ch;margin-top:14px}.sub b{color:var(--ink)}
+  .verdicts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:22px 0}@media(max-width:720px){.verdicts{grid-template-columns:1fr}}
+  .vc{border:1px solid var(--edge);border-radius:11px;padding:13px 15px;border-top-width:3px;background:rgba(18,22,34,.6)}
+  .vc .badge{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em}
+  .vc.s{border-top-color:var(--one)}.vc.s .badge{color:var(--one)} .vc.m{border-top-color:var(--amber)}.vc.m .badge{color:var(--amber)} .vc.f{border-top-color:var(--ember)}.vc.f .badge{color:var(--ember)}
+  .vc p{font-size:12px;color:var(--dim);margin:6px 0 0;line-height:1.45}.vc p b{color:var(--ink)}
+  section{margin:36px 0}
+  h2{font-size:13px;font-family:var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--ochre2);border-left:2px solid var(--ochre);padding-left:11px;margin:0 0 6px}
+  .lede{color:var(--dim);font-size:15px;margin:0 0 18px;max-width:80ch}
+  .panel{background:linear-gradient(180deg,var(--panel),#0a0d14);border:1px solid var(--edge);border-radius:14px;padding:20px;box-shadow:0 24px 60px -40px #000}
+  .controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:14px}
+  button{font-family:var(--mono);font-size:12px;color:var(--ink);background:#1a2030;border:1px solid var(--edge);border-radius:8px;padding:8px 13px;cursor:pointer}button:hover{background:#222b3e;border-color:var(--ochre)}button.on{background:#6e561f;border-color:var(--ochre2);color:#fff}
+  canvas{display:block;width:100%;border-radius:10px;background:#080b12;border:1px solid var(--edge);touch-action:manipulation}
+  .cap{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:7px}
+  .pgrid{display:grid;grid-template-columns:1fr .95fr;gap:22px}@media(max-width:820px){.pgrid{grid-template-columns:1fr}}
+  .q{font-family:var(--mono);font-size:14px;background:#0c1622;border:1px solid var(--edge);border-radius:9px;padding:10px 12px;margin:7px 0;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .q .v{font-weight:700;padding:2px 10px;border-radius:6px}.q .v.t{background:rgba(127,224,160,.16);color:var(--one)}.q .v.f{background:rgba(251,113,133,.14);color:var(--zero)}
+  .reads{display:flex;flex-direction:column;gap:10px}
+  .note{color:var(--dim);font-size:13.5px;border-left:2px solid var(--edge);padding-left:13px;margin:16px 0 0}.note b{color:var(--ink)}
+  .russell{text-align:center;padding:8px 0}
+  .rbtn{font-family:var(--mono);font-size:13px;padding:9px 18px;border-radius:9px;border:1px solid var(--edge);background:#1a2030;color:var(--ink);cursor:pointer;margin:0 6px}
+  .rout{font-family:Georgia,serif;font-size:15px;color:var(--zero);min-height:48px;margin-top:14px}
+  footer{margin-top:44px;border-top:1px solid var(--edge);padding-top:18px;color:var(--faint);font-family:var(--mono);font-size:11px;line-height:1.7}
+  footer a,.bar2 a{color:var(--ochre)}.bar2{font-family:var(--mono);font-size:11.5px;margin-bottom:16px}.bar2 a{text-decoration:none;border-bottom:1px dotted #4a4126}
+  code{font-family:var(--mono);color:var(--ochre2);background:#15120a;padding:1px 5px;border-radius:5px}
+  blockquote{margin:14px 0;padding:10px 16px;border-left:3px solid var(--ochre);color:var(--ink);font-style:italic;font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="bar2"><a href="https://davidwise01.github.io/ud0/">◄ UD0</a> &nbsp; <a href="https://davidwise01.github.io/augustus-de-morgan/">← De Morgan</a> &nbsp; LOGIKĒ · IX</div>
+<header>
+  <div class="kicker">LOGIKĒ · IX · for all, there exists</div>
+  <h1>Gottlob <em>Frege</em></h1>
+  <div class="who">1848 – 1925 · Wismar &amp; Jena · author of the Begriffsschrift · the founder of modern logic</div>
+  <div class="sub">For two thousand years logic was stuck where Aristotle left it: it could say "all men are mortal," but not "every number has a larger one." The gap was <b>quantity</b> — the ability to say <em>for all</em> and <em>there exists</em>, and to chain them. In 1879, in a thin book almost no one read, Frege supplied it: <b>quantifiers</b>, <b>bound variables</b>, and the analysis of a statement as a <em>function</em> applied to arguments. At one stroke, logic could finally express the actual sentences of mathematics — and, much later, the queries of a database and the types of a program. Modern logic begins on that page.</div>
+</header>
+<div class="verdicts">
+  <div class="vc s"><span class="badge">✓ STRONG</span><p><b>Predicate logic — the great leap.</b> Quantifiers (∀, ∃) and the function/argument analysis are the <b>biggest advance since Aristotle</b>. First-order logic is the logic of all modern mathematics and computer science.</p></div>
+  <div class="vc m"><span class="badge">◐ COLLAPSED</span><p><b>His grand program failed.</b> Frege's <b>logicism</b> — that mathematics reduces to pure logic — was wrecked in 1902 by <b>Russell's paradox</b>, which showed his foundational system inconsistent.</p></div>
+  <div class="vc f"><span class="badge">◔ IGNORED, THEN OWNED</span><p><b>Unread in his time.</b> Almost no one noticed him until Russell and Wittgenstein. (And honestly: his late diaries record vicious antisemitic, anti-democratic views — the logic stands; the man does not.)</p></div>
+</div>
+
+<section>
+  <h2>I · For all, and there exists</h2>
+  <p class="lede">Here is the move Aristotle and Boole could not make. Below is a small world of objects, each red or blue (click to flip one). A <b>quantifier</b> lets a single statement range over the whole world: <code>∀x</code> "for every x…", <code>∃x</code> "for some x…". Watch the quantified sentences decide their truth as you change the world — something term logic, locked to whole categories, simply cannot do.</p>
+  <div class="panel">
+    <div class="controls"><span class="mono" style="font-size:11px;color:var(--faint)">click a dot to flip its colour</span></div>
+    <div class="pgrid">
+      <div><canvas id="dom" width="500" height="150"></canvas><div class="cap">a domain of objects · <b style="color:var(--zero)">red</b> / <b style="color:var(--proof)">blue</b> · the quantified sentences read the whole domain</div></div>
+      <div class="reads" id="qs"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>II · Relations, and why order matters</h2>
+  <p class="lede">The deeper gift is <b>relations</b> and <b>nesting</b>. Click the grid to set a relation <code>R(x,y)</code> — "x → y". Then two sentences that use the <em>same</em> symbols in a <em>different order</em> say utterly different things: <code>∀x ∃y R(x,y)</code> — "everyone relates to someone" — versus <code>∃y ∀x R(x,y)</code> — "someone is related to by everyone." "Everyone has a mother" is not "someone is everyone's mother." No logic before Frege could even tell them apart.</p>
+  <div class="panel">
+    <div class="pgrid">
+      <div><canvas id="rel" width="420" height="300"></canvas><div class="cap">click cell (row → col) to toggle the arrow R(x,y) · 4 objects</div></div>
+      <div class="reads">
+        <div class="q"><span>∀x ∃y R(x,y) <span style="color:var(--faint)">every row has an arrow</span></span><span class="v" id="aexy">F</span></div>
+        <div class="q"><span>∃y ∀x R(x,y) <span style="color:var(--faint)">some column is all arrows</span></span><span class="v" id="exay">F</span></div>
+        <div class="note">Set every row to have one arrow and the first is true; that almost never makes the second true. Swapping ∀ and ∃ is not a rephrasing — it changes the claim. Capturing that is the whole reason mathematics needed Frege.</div>
+      </div>
+    </div>
+  </div>
+  <blockquote>"Every good mathematician is at least half a philosopher, and every good philosopher at least half a mathematician." <span style="color:var(--faint);font-style:normal;font-size:12px">— Gottlob Frege</span></blockquote>
+</section>
+
+<section>
+  <h2>III · The paradox that broke the foundation</h2>
+  <p class="lede">Frege spent decades on one dream: to derive all of arithmetic from <em>pure logic alone</em> — <b>logicism</b>. As the second volume of his <em>Grundgesetze</em> was at the printer in 1902, a letter arrived from a young Bertrand Russell with a single, fatal question. Consider <b>the set of all sets that do not contain themselves</b>. Does it contain itself? Try to answer.</p>
+  <div class="panel">
+    <div class="russell">
+      <div style="font-family:Georgia;font-size:17px;margin-bottom:12px">R = { all sets that are <em>not</em> members of themselves }. &nbsp; Is R ∈ R?</div>
+      <button class="rbtn" id="ryes">assume R ∈ R</button><button class="rbtn" id="rno">assume R ∉ R</button>
+      <div class="rout" id="rout">Pick one — and watch it refute itself.</div>
+    </div>
+    <p class="note" style="border-color:var(--amber);margin-top:18px"><b style="color:var(--amber)">Gate kept on.</b> Russell's paradox didn't dent Frege's <em>logic</em> — quantifiers and predicate logic are untouched and immortal. It killed his <em>foundations</em>: the unrestricted "set of all things satisfying a property" his system allowed is self-contradictory. Frege, with rare honesty, appended a note saying a cornerstone of his edifice had given way, and never really recovered the program; arithmetic was later refounded on type theory and on the ZFC axioms that forbid such sets. Two further honest things: he was <b>almost entirely ignored</b> in his lifetime — modern logic flows from him only because Russell, Wittgenstein and Carnap carried it forward — and his late <b>diaries (1924) record virulent antisemitic and anti-democratic views.</b> The greatest logician since Aristotle, whose foundations cracked, who went unread, and whose character at the end was repugnant. The work is permanent; the rest is told plainly.</p>
+  </div>
+</section>
+
+<footer>
+  GOTTLOB FREGE · LOGIKĒ IX · two-layer honest<br>
+  live quantifiers (∀x, ∃x over a domain) · relations &amp; nested order (∀x∃y vs ∃y∀x — different claims) · Russell's paradox (R∈R ⟺ R∉R, the contradiction that ended logicism)<br>
+  Begriffsschrift (1879) = the birth of predicate / first-order logic · logicism wrecked by Russell 1902 · ignored in life; foundation of modern math &amp; CS<br>
+  ← <a href="https://davidwise01.github.io/augustus-de-morgan/">De Morgan</a> · next → Gödel (the limits) · Turing (computability) · <b>Shannon</b> (the gate)<br>
+  LOGIKĒ · the lineage of logical mathematics · governor David Lee Wise · CC-BY-ND-4.0
+</footer>
+</div>
+<script>
+"use strict";
+// MODULE I : quantifiers over a domain
+(function(){
+  const cv=document.getElementById('dom');let dots=[1,0,0,1,0,1]; // 1=red,0=blue
+  function fit(){const r=cv.getBoundingClientRect();const d=window.devicePixelRatio||1;cv.width=r.width*d;cv.height=r.height*d;const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return{g,w:r.width,h:r.height};}
+  function pos(i,w,h){const n=dots.length;return [w*(0.12+0.76*i/(n-1)),h/2];}
+  function draw(){const{g,w,h}=fit();g.clearRect(0,0,w,h);
+    dots.forEach((d,i)=>{const[x,y]=pos(i,w,h);g.fillStyle=d?'#fb7185':'#5ad1ff';g.shadowBlur=10;g.shadowColor=g.fillStyle;g.beginPath();g.arc(x,y,20,0,7);g.fill();g.shadowBlur=0;
+      g.fillStyle='#0c0f17';g.font='12px ui-monospace,monospace';g.textAlign='center';g.fillText('x'+(i+1),x,y+4);});
+    const allR=dots.every(d=>d===1),someR=dots.some(d=>d===1);
+    const Q=[['∀x Red(x)','all are red',allR],['∃x Red(x)','some is red',someR],
+             ['∀x (Red(x)∨Blue(x))','tautology — always true',true],['∃x (Red(x)∧Blue(x))','contradiction — always false',false]];
+    document.getElementById('qs').innerHTML=Q.map(([s,d,v])=>'<div class="q"><span>'+s+' <span style="color:var(--faint)">'+d+'</span></span><span class="v '+(v?'t':'f')+'">'+(v?'TRUE':'FALSE')+'</span></div>').join('');
+  }
+  cv.addEventListener('click',e=>{const r=cv.getBoundingClientRect();const mx=e.clientX-r.left,my=e.clientY-r.top;
+    dots.forEach((d,i)=>{const[x,y]=pos(i,r.width,r.height);if(Math.hypot(mx-x,my-y)<24)dots[i]^=1;});draw();});
+  draw();window.addEventListener('resize',draw);
+})();
+// MODULE II : relations matrix
+(function(){
+  const cv=document.getElementById('rel');const N=4;let R=[[0,1,0,0],[0,0,1,0],[1,0,0,0],[0,0,0,1]];
+  function fit(){const r=cv.getBoundingClientRect();const d=window.devicePixelRatio||1;cv.width=r.width*d;cv.height=r.height*d;const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return{g,w:r.width,h:r.height};}
+  let geo;
+  function draw(){const{g,w,h}=fit();g.clearRect(0,0,w,h);
+    const m=40,cell=Math.min((w-2*m)/N,(h-2*m)/N),ox=m+12,oy=m;geo={cell,ox,oy};
+    g.font='13px Georgia';g.textAlign='center';
+    for(let i=0;i<N;i++){g.fillStyle='#fb7185';g.fillText('x'+(i+1),ox+i*cell+cell/2,oy-8);g.fillStyle='#5ad1ff';g.fillText('x'+(i+1),ox-16,oy+i*cell+cell/2+4);}
+    g.fillStyle='#7c7660';g.font='10px ui-monospace,monospace';g.fillText('to →',ox+N*cell/2,oy-24);g.save();g.translate(ox-30,oy+N*cell/2);g.rotate(-Math.PI/2);g.fillText('from ↓',0,0);g.restore();
+    for(let r2=0;r2<N;r2++)for(let c=0;c<N;c++){const x=ox+c*cell,y=oy+r2*cell;const on=R[r2][c];
+      g.fillStyle=on?'rgba(127,224,160,.45)':'rgba(20,26,40,.6)';g.strokeStyle='#2a3346';g.fillRect(x+2,y+2,cell-4,cell-4);g.strokeRect(x+2,y+2,cell-4,cell-4);
+      if(on){g.fillStyle='#7fe0a0';g.font='15px Georgia';g.fillText('→',x+cell/2,y+cell/2+5);}}
+    const axy=R.every(row=>row.some(v=>v));
+    let exay=false;for(let c=0;c<N;c++){if(R.every(row=>row[c]))exay=true;}
+    const set=(id,v)=>{const e=document.getElementById(id);e.textContent=v?'TRUE':'FALSE';e.className='v '+(v?'t':'f');};
+    set('aexy',axy);set('exay',exay);
+  }
+  cv.addEventListener('click',e=>{if(!geo)return;const r=cv.getBoundingClientRect();const mx=e.clientX-r.left,my=e.clientY-r.top;
+    const c=Math.floor((mx-geo.ox)/geo.cell),rr=Math.floor((my-geo.oy)/geo.cell);
+    if(rr>=0&&rr<N&&c>=0&&c<N){R[rr][c]^=1;draw();}});
+  draw();window.addEventListener('resize',draw);
+})();
+// MODULE III : Russell paradox
+(function(){
+  const out=document.getElementById('rout');
+  document.getElementById('ryes').onclick=()=>{out.innerHTML='If R ∈ R, then R is a set that contains itself — so by R’s own rule (members are sets that <em>don’t</em> contain themselves) it must <b>not</b> be in R. So R ∉ R. <b style="color:var(--ember)">Contradiction.</b>';};
+  document.getElementById('rno').onclick=()=>{out.innerHTML='If R ∉ R, then R does <em>not</em> contain itself — which is exactly R’s membership rule — so it <b>does</b> belong in R. So R ∈ R. <b style="color:var(--ember)">Contradiction.</b>';};
+})();
+</script>
+</body>
+</html>
