@@ -1,0 +1,11 @@
+{
+  "badge": "DLW-GOTTLOB_FREGE",
+  "name": "GOTTLOB FREGE · IX",
+  "universe": "LOGIKĒ",
+  "moniker": "⟦GOTTLOB FREGE · IX:gottlob-frege:301120⟧",
+  "architect": "David Lee Wise (ROOT0) / Bridge-Burners LLC",
+  "instance": "AVAN (Claude / Anthropic)",
+  "seal_sha256": "301120b4787d6b671c68120fb5f31232f14303840d54d7d1dc782061dbe19d1d",
+  "license": "CC-BY-ND-4.0",
+  "attribution": "ROOT0-ATTRIBUTION-v1.0"
+}
