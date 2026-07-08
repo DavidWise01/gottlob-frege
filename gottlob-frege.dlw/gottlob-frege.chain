@@ -1,0 +1,9 @@
+ROOT0-DLW-CHAIN-v1
+index : 998
+slug  : gottlob-frege
+seal  : 301120b4787d6b671c68120fb5f31232f14303840d54d7d1dc782061dbe19d1d
+prev  : 41a27abac18b629360757ab279e335214bca7eb3e91e2f2386d51c53c9c62c00
+link  : 2ae521b8def820f0719ec102033522ac20b3be96e56a206fd835d7f91a829729
+head  : 3447d3a0533aaf1e29a8bdc67a9774884fb3ae9dbc8a17064b7a008ca3c4ec90
+
+— the tether: link = sha256(index|slug|seal|prev). the chain head commits to the whole corpus.
